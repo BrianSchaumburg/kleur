@@ -1,72 +1,58 @@
+import java.lang.reflect.Array;
 import java.util.*;
 public class Garage {
-    Wagen wagen1, wagen2, wagen3;
+    private Wagen[] garage;
 
-    public void setWagen1(Wagen wagen1) {
-        if(wagen1!=null)
-        this.wagen1 = wagen1;
+    public Wagen[] getGarage() {
+        return garage;
     }
 
-    public void setWagen2(Wagen wagen2) {
-        if(wagen2!=null)
-        this.wagen2 = wagen2;
-    }
+    public Garage(){garage = new Wagen[3];}
+    public void toevoegenWagen(Wagen wagen, int positie)
+    {
+        if(positie>3 || positie<=0 || wagen == null)
+        {
+            throw new IllegalArgumentException("Check de parameters");
+        }
+        else {
+            switch (positie) {
+                case 1:
+                    garage[0] = wagen;
+                    break;
+                case 2:
 
-    public void setWagen3(Wagen wagen3) {
-        if(wagen3!=null)
-        this.wagen3 = wagen3;
-    }
-    public Garage(Wagen wagen1, Wagen wagen2, Wagen wagen3)
-    {setWagen1(wagen1);
-        setWagen2(wagen2);
-        setWagen3(wagen3);
-
-
-    }
-    public void toevoegenWagen(Wagen wagen, int plaats)
-    {if(wagen == null || plaats>3 | plaats <=0) {
-        switch (plaats) {
-            case 1:
-                if (wagen1 == null)
-                    wagen1 = wagen;
+                    garage[1] = wagen;
                 break;
-            case 2:
-                if (wagen2 == null) {
-                    wagen2 = wagen;
-                }
+                case 3 :
+                    garage[2]=  wagen;
                 break;
-            case 3:
-                if (wagen3 == null) {
-                    wagen3 = wagen;
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("Check the position");
-
+                default: throw new IllegalArgumentException("Er is iets foutgelopen");
+            }
         }
     }
-    else
-        throw new IllegalArgumentException("Check the conditions");
-    }
     public Wagen hoogsteKilometerstand()
-    {int waarde1 = wagen1.getKilometerstand();
-        int waarde2 = wagen2.getKilometerstand();
-        int waarde3 = wagen3.getKilometerstand();
-       List<Integer> lijst = new ArrayList<>();
-       lijst.add(waarde1);
-       lijst.add(waarde2);
-       lijst.add(waarde3);
-       int element  = Collections.max(lijst);
-       if(element == wagen1.getKilometerstand())
-       {
-           return wagen1;
-       }
-       else if(element == wagen2.getKilometerstand())
-       {
-           return wagen2;
-       }
-       else
-           return wagen3;
+    {   List<Integer>temp = new ArrayList<Integer>();
+        for(int i=0; i < garage.length; i ++ ) {
+            if (garage[i] != null)
+                temp.add(garage[i].getKilometerstand());
+        }
+        int max= Collections.max(temp);
+        if(max == temp.get(0))
+        {
+            return garage[0];
+        }
+        else if (max == temp.get(1))
+        {
+            return garage[1];
+        }
+        else
+            return garage[2];
 
+    }
+    //hier kan nog toString toegevoegd worden
+
+    @Override
+    public String toString() {
+        return "De hoogste kilometerstand is: "+this.hoogsteKilometerstand().getKilometerstand();
     }
 }

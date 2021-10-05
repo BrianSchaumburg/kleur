@@ -3,14 +3,13 @@ public class Wagen {
     private String naam, type; Color kleur; private int kilometerstand;
     private void setNaam(String merknaam)
     {
-        if(merknaam == "opel" || merknaam == "vw" || merknaam =="mercedes" )
+        if(merknaam == "Opel" || merknaam == "VW" || merknaam =="Mercedes" )
 
             naam = merknaam;
 
 
         else
-            throw new IllegalArgumentException("Check de parameters");
-    }
+this.errorGeven();    }
 
     private void setKleur(Color kleur) {
 
@@ -20,14 +19,14 @@ public class Wagen {
 
 
         else
-            throw new IllegalArgumentException("check the parameters");
-    }
+this.errorGeven();    }
     private void setKilometers(int kilometers
     )
     {
         if(kilometers<0)
         {
-            throw new IllegalArgumentException("Check the kilometers");
+
+            this.errorGeven();
         }
         else
             this.kilometerstand = kilometers;
@@ -40,14 +39,21 @@ public class Wagen {
     public int getKilometerstand() {
         return kilometerstand;
     }
-
+    private void errorGeven()
+    {
+         throw new IllegalArgumentException("Check de paramters");
+    }
+    private void setType(String type)
+    {
+        if(type== null || type.trim().isEmpty() && !Character.isUpperCase(type.charAt(8)))
+        {
+this.errorGeven();        }
+    }
     public Wagen(String naam, String type, Color kleur, int kilometerstand) {
         setKleur(kleur);
         setNaam(naam);
         setKilometers(kilometerstand);
-        if((type!=null && type.trim().isEmpty() ) && Character.isUpperCase(type.charAt(0) ))
-            this.type
-                     = type;
+        setType(type);
     }
 
 }
