@@ -7,7 +7,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class testKlasse {
+public class Testklasse {
     @Test
     public void wagenTest()
     {//alle methodes worden hier getest
